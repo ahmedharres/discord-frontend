@@ -9,10 +9,11 @@ export const getActions = (dispatch) => {
     return {
         login: (userDetails, navigate) => dispatch(login(userDetails, navigate)),
         register: (userDetails, navigate) => dispatch(register(userDetails, navigate)),
+        setUserDetails: (userDetails) => dispatch(setUserDetails(userDetails)),
     };
 };
 
-const SET_USER_DETAILS = (userDetails) => {
+const setUserDetails = (userDetails) => {
     return {
         type: authActions.SET_USER_DETAILS,
         userDetails,
@@ -25,11 +26,11 @@ const login = (userDetails, navigate) => {
         const response = await api.login(userDetails);
         console.log(response);
         if (response.error) {
-             dispatch(openAlertMessage(response?.exception?.response?.data))
+            dispatch(openAlertMessage(response?.exception?.response?.data))
         } else {
             const { userDetails } = response?.data;
             localStorage.setItem('user', JSON.stringify(userDetails));
-            dispatch(SET_USER_DETAILS(userDetails));
+            dispatch(setUserDetails(userDetails));
             navigate('/dashboard');
         }
 
@@ -42,12 +43,12 @@ const register = (userDetails, navigate) => {
         const response = await api.register(userDetails);
         console.log(response);
         if (response.error) {
-             dispatch(openAlertMessage(response?.exception?.response?.data))
+            dispatch(openAlertMessage(response?.exception?.response?.data))
 
         } else {
             const { userDetails } = response?.data;
             localStorage.setItem('user', JSON.stringify(userDetails));
-            dispatch(SET_USER_DETAILS(userDetails));
+            dispatch(setUserDetails(userDetails));
             navigate('/login');
         }
 
