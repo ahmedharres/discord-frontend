@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from '@mui/material';
 import DropdwonMenu from './Dropdwonmenu'
+import ChosenOptionLabel from './ChosenOptionLabel';
 
 const MainContainer = styled('div')({
     position:"absolute",
@@ -16,6 +17,7 @@ const MainContainer = styled('div')({
 });
 const AppBar = () => {
     return <MainContainer>
+        <ChosenOptionLabel/>
         <DropdwonMenu/>
     </MainContainer>
 };

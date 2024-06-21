@@ -17,8 +17,8 @@ const AvatarPreview = styled('div')({
 
 const Avatar = ({ username, large }) => {
     return (
-        <AvatarPreview style={large ? { height: '800px', width: '800px' } : {}}>
-            {typeof username === 'string' ? username.substring(0, 2) : ""}
+        <AvatarPreview style={large ? { height: '80px', width: '80px' } : {}}>
+            {typeof username === 'string' ? username.substring(0, 2).toUpperCase() : ""}
         </AvatarPreview>
     );
 }
