@@ -20,16 +20,28 @@ const MessageContainer = styled('div')({
 
 const MessageContent = styled('div')({
     color: 'black',
+    backgroundColor: '#B3B3B3 ',
+    borderRadius: '5px',
+    overflow: 'auto',
+    padding: '10px',
+   
+
 });
 
 const SameAuthorMessageContent = styled('div')({
     color: 'black',
-    width: '97%',
+    overflow: 'auto',
+    backgroundColor: '#B3B3B3 ',
+    padding: '10px',
+    borderRadius: '5px',
+    display: 'inline-block',
+    marginLeft: '70px',
+    marginTop:'5px',
+
 });
 
 const SameAuthorMessageText = styled('span')({
-    marginLeft: '70px',
-});
+ });
 
 const Message = ({ content, sameAuthor, username, date, sameDay }) => {
     if (sameAuthor && sameDay) {

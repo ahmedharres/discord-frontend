@@ -11,7 +11,7 @@ const MainContainer = styled("div")({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
- });
+});
 
 const convertDateToHumanReadable = (date, format) => {
   const map = {
@@ -19,9 +19,11 @@ const convertDateToHumanReadable = (date, format) => {
     dd: date.getDate(),
     yy: date.getFullYear().toString().slice(-2),
     yyyy: date.getFullYear(),
+    hh: date.getHours().toString().padStart(2, '0'),
+    MM: date.getMinutes().toString().padStart(2, '0'),
   };
 
-  return format.replace(/mm|dd|yy|yyy/gi, (matched) => map[matched]);
+  return format.replace(/mm|dd|yy|yyyy|hh|MM/gi, (matched) => map[matched]);
 };
 
 const Messages = ({ chosenChatDetails, messages }) => {
@@ -41,6 +43,11 @@ const Messages = ({ chosenChatDetails, messages }) => {
             "dd/mm/yy"
           );
 
+        const messageDate = convertDateToHumanReadable(
+          new Date(message.date),
+          "dd/mm/yy hh:MM"
+        );
+
         return (
           <div key={message._id} style={{ width: "97%" }}>
             {(!sameDay || index === 0) && (
@@ -55,10 +62,7 @@ const Messages = ({ chosenChatDetails, messages }) => {
               content={message.content}
               username={message.author.username}
               sameAuthor={sameAuthor}
-              date={convertDateToHumanReadable(
-                new Date(message.date),
-                "dd/mm/yy"
-              )}
+              date={messageDate}
               sameDay={sameDay}
             />
           </div>
