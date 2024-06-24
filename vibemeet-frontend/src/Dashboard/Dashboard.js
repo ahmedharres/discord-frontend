@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { getActions } from "../store/actions/authActions";
 import backgroundImage from '../shared/components/assets/images/background2.jpg';
 import { connectWithSocketServer } from "../realtimeCommunication/socketConnection";
-
+import Room from "./Room/Room";
 const Wrapper = styled("div")({
   width: "100%",
   height: "100vh",
@@ -17,7 +17,7 @@ const Wrapper = styled("div")({
   backgroundImage: `url(${backgroundImage})`,
 });
 
-const Dashboard = ({ setUserDetails }) => {
+const Dashboard = ({ setUserDetails, isUserInRoom }) => {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -43,9 +43,16 @@ const Dashboard = ({ setUserDetails }) => {
       <FriendsSideBar />
       <Messenger />
       <AppBar />
+      {isUserInRoom && <Room />}
     </Wrapper>
   );
 };
+
+const mapStoreStateToProps = ({ room }) => {
+  return {
+    ...room,
+  }
+}
 
 const mapActionsToProps = (dispatch) => {
   return {
@@ -53,4 +60,4 @@ const mapActionsToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapActionsToProps)(Dashboard);
+export default connect(mapStoreStateToProps, mapActionsToProps)(Dashboard);
