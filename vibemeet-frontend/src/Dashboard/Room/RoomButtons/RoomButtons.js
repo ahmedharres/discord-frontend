@@ -19,7 +19,7 @@ const MainContainer = styled('div')({
 const RoomButtons = () => {
     return (
         <MainContainer>
-            <MicButton />
+            <MicButton /> 
             <CameraButton />
             <ScreenShareButton />
             <CloseRoomButton />
