@@ -5,7 +5,8 @@ export const roomActions = {
     SET_LOCAL_STREAM: 'ROOM.SET_LOCAL_STREAM',
     SET_REMOTE_STREAMS: 'ROOM.SET_REMOTE_STREAMS',
     SET_AUDIO_ONLY: 'ROOM.SET_AUDIO_ONLY',
-    SET_SCREEN_SHARE_STREAM: 'ROOM.SET_SCREEN_SHARE_STREAM'
+    SET_SCREEN_SHARE_STREAM: 'ROOM.SET_SCREEN_SHARE_STREAM',
+    SET_IS_USER_JOIN_WITH_ONLY_AUDIO: 'ROOM.IS_USER_JOIN_WITH_ONLY_AUDIO'
 };
 
 export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => {
@@ -19,9 +20,11 @@ export const setOpenRoom = (isUserRoomCreator = false, isUserInRoom = false) => 
 export const getActions = (dispatch) => {
     return {
         setAudioOnly: (audioOnly) => dispatch(setAudioOnly(audioOnly)),
+        setScreenSharingStream: (stream) => {
+            dispatch(setScreenSharingStream(stream));
+        },
     };
 };
-
 
 export const setRoomDetails = (roomDetails) => {
     return {
@@ -47,3 +50,23 @@ export const setAudioOnly = (audioOnly) => {
         audioOnly,
     };
 };
+export const setRemoteStreams = (remoteStreams) => {
+    return {
+        type: roomActions.SET_REMOTE_STREAMS,
+        remoteStreams,
+    };
+};
+export const setScreenSharingStream = (stream) => {
+    return {
+        type: roomActions.SET_SCREEN_SHARE_STREAM,
+        isScreenSharingActive: !!stream,
+        screenSharingStream: stream || null,
+    };
+};
+
+export const setIsUserJoinWithOnlyAudio = (onlyWithAudio) => {
+    return {
+        type: roomActions.SET_IS_USER_JOIN_WITH_ONLY_AUDIO,
+        isUserJoinWithOnlyAudio: onlyWithAudio,
+    }
+}
